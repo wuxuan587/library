@@ -15,9 +15,12 @@ from django.http import HttpResponse
 from wxapp.models import order
 from wxapp.models import test
 from wxapp.models import CJsonEncoder
+from django.http import JsonResponse
 #from wxapp.wrapper import view_exception_safe
 from django.forms.models import model_to_dict
 from wxapp.models import comment
+
+from utils.logger import logger_for_wxapp_view as logger
 
 # Create your views here.
 
@@ -36,13 +39,16 @@ from wxapp.models import comment
 #		return HttpResponse(json.dumps(ret_body2))
 
 def orderRooms(requests):
-	Data=order(name=requests.GET.get('name'),department=requests.GET.get('department'),tel=requests.GET.get('tel'),order_date=requests.GET.get('order_date'),start_time=requests.GET.get('start_time'),end_time=requests.GET.get('end_time'))
+#	logger.debug(requests.GET)
+	Data=order(index=requests.GET.get('index'),name=requests.GET.get('name'),department=requests.GET.get('department'),tel=requests.GET.get('tel'),order_date=requests.GET.get('order_date'),start_time=requests.GET.get('start_time'),end_time=requests.GET.get('end_time'))
+	logger.info("Index: {0}".format(requests.GET.get('index')))
 #	result=order.objects.filter(order_date=requests.GET.get('order_date'),start_time=requests.GET.get('start_time')).all()
 	res=order.objects.filter(order_date=requests.GET.get('order_date'))
 	first=requests.GET.get('start_time')
 	last=requests.GET.get('end_time')
 #	first1=str(first).join(":00")
 #	last1=str(last).join(":00")
+#	index=requests.GET.get('index')
 	msg1='failed'
 	msg2='successful'
 	msg3='conflict'
@@ -91,6 +97,8 @@ def testRooms(requests):
 
 
 def queryRooms(requests):
+	import pdb
+	pdb.set_trace()
 	res=order.objects.all()
 #	res=serializers.serialize('python',order.objects.all(),ensure_scii=False)
 	room_list=[]

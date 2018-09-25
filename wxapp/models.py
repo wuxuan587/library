@@ -13,7 +13,10 @@ class order(models.Model):
 	order_date=models.DateField(default='2018-01-01',blank=True,null=True)
 	start_time=models.TimeField(default='09:00',blank=True,null=True)
 	end_time=models.TimeField(default='10:00',blank=True,null=True)
-	meeting_content=models.TextField(max_length=100,blank=True,null=True)
+	index=models.IntegerField(default=0,max_length=20,blank=True,null=True)
+#	index=models.IntegerField(default=1,null=False,blank=False)
+	meeting_content=models.TextField(default='0',max_length=100,blank=True,null=True)
+
 
 
 class test(models.Model):

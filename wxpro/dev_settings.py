@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'wxpro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'wxpro',
+        'NAME': 'wxpro_dev',
 	'USER':'wuxuan',
 	'PASSWORD':'wuxuan587',
 	'HOST':'localhost',
